@@ -41,6 +41,15 @@ module FinalProject
     # the framework and any gems in your application.
 
     # Don't generate system test files.
+    
     config.generators.system_tests = nil
+    Rails.application.config.middleware.insert_after(
+    ActionDispatch::Static,
+    ActionDispatch::Static,
+    Rails.root.join("docs").to_s,
+    index: config.public_file_server.index_name, headers: config.public_file_server.headers || {}
+  )
+  
   end
+
 end
